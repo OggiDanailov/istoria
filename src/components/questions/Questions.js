@@ -1,6 +1,5 @@
 import React, { useState } from "react"
-import ALL_QUESTIONS from "./ALL_QUESTIONS"
-
+import { useDispatch, useSelector } from "react-redux"
 import clsx from "clsx"
 import {
   Grid,
@@ -10,6 +9,11 @@ import {
   Container,
   makeStyles,
 } from "@material-ui/core"
+
+import Answers from "../Answers"
+import Score from "../Score"
+import ALL_QUESTIONS from "./ALL_QUESTIONS"
+import * as actions from "../../actionTypes"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -40,8 +44,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Questions = () => {
+  const dispatch = useDispatch()
   const classes = useStyles()
-  const [selectButton, setSelectButton] = useState("")
   const [index, setIndex] = useState(0)
   const [answer, setAnswer] = useState(false)
   const [score, setScore] = useState(0)
@@ -49,9 +53,12 @@ const Questions = () => {
   const [disabledStatus, setDisabledStatus] = useState(true)
 
   const selectAnswer = (event) => {
-    // setSelectButton(event.target.innerHTML)
     setDisabledStatus(false)
+    console.log(event.target.innerHTML)
     if (event.target.innerHTML === ALL_QUESTIONS[index].correctAnswer) {
+      dispatch({
+        type: actions.CORRECT_SCORE,
+      })
       setScore(score + 1)
       setAnswer(true)
     }
@@ -66,6 +73,7 @@ const Questions = () => {
 
   return (
     <Container maxWidth='md' className={classes.container}>
+      <Score />
       {hidden && (
         <>
           <div className={classes.questions}>
@@ -106,8 +114,8 @@ const Questions = () => {
       {!hidden && (
         <Container className={classes.nextPage}>
           <Grid>
-            {answer ? (
-              <p>{ALL_QUESTIONS[index].synopsis}</p>
+            {!answer ? (
+              <Answers answer={ALL_QUESTIONS[index]} />
             ) : (
               <p>This is a wrong answer</p>
             )}
