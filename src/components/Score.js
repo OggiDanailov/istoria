@@ -1,5 +1,5 @@
 import React from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { makeStyles } from "@material-ui/core"
 
 const useStyles = makeStyles((theme) => ({
@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Score = () => {
   const classes = useStyles()
-  return <div className={classes.container}></div>
+  const { score } = useSelector((state) => state.projectBoard)
+  return <div className={classes.container}>{score === 0 ? " " : score}</div>
 }
 
 export default Score

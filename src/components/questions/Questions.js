@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import React, { useState, useEffect, useCallback } from "react"
+import { useDispatch } from "react-redux"
 import clsx from "clsx"
 import {
   Grid,
@@ -46,30 +46,50 @@ const useStyles = makeStyles((theme) => ({
 const Questions = () => {
   const dispatch = useDispatch()
   const classes = useStyles()
-  const [index, setIndex] = useState(0)
-  const [answer, setAnswer] = useState(false)
+
+  const [counter, setCounter] = useState(0)
+  const [answer, setAnswer] = useState("")
+  const [correctAnswer, setCorrectAnswer] = useState(false)
   const [score, setScore] = useState(0)
   const [hidden, setHidden] = useState(true)
   const [disabledStatus, setDisabledStatus] = useState(true)
+  const [activeButton, setActiveButton] = useState("")
 
-  const selectAnswer = (event) => {
-    setDisabledStatus(false)
-    console.log(event.target.innerHTML)
-    if (event.target.innerHTML === ALL_QUESTIONS[index].correctAnswer) {
-      dispatch({
-        type: actions.CORRECT_SCORE,
-      })
+  // const { counter } = useSelector((state) => state.projectBoard)
+
+  const selectAnswer = useCallback(
+    (event) => {
+      setDisabledStatus(false)
+      const currentAnswer = parseInt(event.target.innerHTML)
+      setActiveButton(parseInt(event.target.innerHTML))
+      if (currentAnswer === parseInt(ALL_QUESTIONS[counter].correctAnswer)) {
+        setAnswer(currentAnswer)
+        setCorrectAnswer(true)
+      } else {
+        setCorrectAnswer(false)
+      }
+    },
+    [counter]
+  )
+
+  const submit = () => {
+    setHidden(!hidden)
+    if (correctAnswer) {
       setScore(score + 1)
-      setAnswer(true)
     }
   }
 
   const nextQuestion = () => {
+    setCounter(counter + 1)
     setHidden(!hidden)
-    if (answer) {
-      setIndex(index + 1)
-    }
   }
+
+  useEffect(() => {
+    dispatch({
+      type: actions.CORRECT_SCORE,
+      payload: { answer, score },
+    })
+  })
 
   return (
     <Container maxWidth='md' className={classes.container}>
@@ -77,7 +97,7 @@ const Questions = () => {
       {hidden && (
         <>
           <div className={classes.questions}>
-            {ALL_QUESTIONS[index].question}
+            {ALL_QUESTIONS[counter].question}
           </div>
           <div className={classes.buttons}>
             <ButtonGroup
@@ -85,10 +105,14 @@ const Questions = () => {
               aria-label='contained primary button group'
               className={classes.buttonsWrapper}
             >
-              {ALL_QUESTIONS[index].options.map((option) => (
+              {ALL_QUESTIONS[counter].options.map((option, index) => (
                 <Button
                   key={option}
-                  className={classes.buttons}
+                  name={`button` + (index + 1)}
+                  className={clsx(
+                    classes.buttons,
+                    activeButton === option && classes.buttonsSelected
+                  )}
                   onClick={(e) => selectAnswer(e)}
                 >
                   {option}
@@ -104,9 +128,9 @@ const Questions = () => {
             <Button
               className={classes.nextButton}
               disabled={disabledStatus}
-              onClick={() => nextQuestion()}
+              onClick={() => submit()}
             >
-              Next
+              Submit
             </Button>
           </ButtonGroup>
         </>
@@ -114,11 +138,15 @@ const Questions = () => {
       {!hidden && (
         <Container className={classes.nextPage}>
           <Grid>
-            {!answer ? (
-              <Answers answer={ALL_QUESTIONS[index]} />
+            {correctAnswer ? (
+              <Box>
+                <p>Correct!</p>
+                <Answers answer={ALL_QUESTIONS[counter]} />
+              </Box>
             ) : (
               <p>This is a wrong answer</p>
             )}
+            <Button onClick={() => nextQuestion()}>Next Question</Button>
           </Grid>
         </Container>
       )}

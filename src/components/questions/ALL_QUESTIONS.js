@@ -9,6 +9,15 @@ export default [
   {
     question: "when was Constantinpole conquered by the Ottoman Turks?",
     correctAnswer: 1453,
-    options: [1432, 1454, 1423, 1444],
+    options: [1432, 1454, 1453, 1444],
+    synopsis:
+      "The city fell on 29 May 1453, the culmination of a 53-day siege which had begun on 6 April 1453. The attacking Ottoman army, which significantly outnumbered Constantinople's defenders, was commanded by the 21-year-old Sultan Mehmed II, while the Byzantine army was led by Emperor Constantine XI Palaiologos. After conquering the city, Mehmed II made Constantinople the new Ottoman capital, replacing Adrianople.",
+  },
+  {
+    question: "when did teh French Revolution start?",
+    correctAnswer: 1789,
+    options: [1789, 1798, 1776, 1774],
+    synopsis:
+      "The French Revolution was a period of social and political upheaval in France and its colonies beginning in 1789 and ending in 1799. The revolution overthrew the monarchy; established a republic; catalyzed violent periods of political turmoil; and finally culminated in a dictatorship under Napoleon, who brought many of the revolution's principles to areas he conquered in Western Europe and beyond. Inspired by liberal and radical ideas such as equality before the law, the Revolution influenced the decline of absolute monarchies while replacing them with republics and liberal democracies.",
   },
 ]

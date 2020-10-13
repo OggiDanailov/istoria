@@ -3,16 +3,19 @@ import dotProp from "dot-prop-immutable"
 
 const initialState = {
   counter: 0,
+  score: 0,
+  currentQuestions: [],
   correctAnswers: [],
   wrongAnswers: [],
-  points: [],
 }
 
 const projectBoardReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.CORRECT_SCORE:
-      const { counter } = action.payload
-      return dotProp.set(state, "counter", counter + 1)
+      // console.log(action.payload)
+      const { answer, score } = action.payload
+      state = dotProp.set(state, "correctAnswers", answer)
+      return dotProp.set(state, "score", score)
     default:
       return state
   }
