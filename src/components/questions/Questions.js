@@ -60,9 +60,9 @@ const Questions = () => {
   const selectAnswer = useCallback(
     (event) => {
       setDisabledStatus(false)
-      const currentAnswer = parseInt(event.target.innerHTML)
-      setActiveButton(parseInt(event.target.innerHTML))
-      if (currentAnswer === parseInt(ALL_QUESTIONS[counter].correctAnswer)) {
+      const currentAnswer = event.target.innerHTML
+      setActiveButton(event.target.innerHTML)
+      if (currentAnswer === ALL_QUESTIONS[counter].correctAnswer) {
         setAnswer(currentAnswer)
         setCorrectAnswer(true)
       } else {
@@ -80,8 +80,12 @@ const Questions = () => {
   }
 
   const nextQuestion = () => {
-    setCounter(counter + 1)
-    setHidden(!hidden)
+    if (counter === ALL_QUESTIONS.length - 1) {
+      setCounter(0)
+    } else {
+      setCounter(counter + 1)
+      setHidden(!hidden)
+    }
   }
 
   useEffect(() => {

@@ -1,10 +1,9 @@
 import React from "react"
-import Questions from "./components/questions/Questions"
-
+import Routing from "./components/Routing"
 function App() {
   return (
     <div className='App'>
-      <Questions />
+      <Routing />
     </div>
   )
 }
