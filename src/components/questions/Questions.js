@@ -48,9 +48,11 @@ const Questions = () => {
   const classes = useStyles()
 
   const [counter, setCounter] = useState(0)
-  const [answer, setAnswer] = useState("")
-  const [correctAnswer, setCorrectAnswer] = useState(false)
   const [score, setScore] = useState(0)
+  const [answer, setAnswer] = useState("")
+  const [currentQuestion, setCurrentQuestion] = useState("")
+  const [answerStatus, setAnswerStatus] = useState(false)
+
   const [hidden, setHidden] = useState(true)
   const [disabledStatus, setDisabledStatus] = useState(true)
   const [activeButton, setActiveButton] = useState("")
@@ -64,20 +66,31 @@ const Questions = () => {
       setActiveButton(event.target.innerHTML)
       if (currentAnswer === ALL_QUESTIONS[counter].correctAnswer) {
         setAnswer(currentAnswer)
-        setCorrectAnswer(true)
+        setCurrentQuestion(ALL_QUESTIONS[counter].question)
+        setAnswerStatus(true)
       } else {
-        setCorrectAnswer(false)
+        setAnswerStatus(false)
       }
     },
     [counter]
   )
 
-  const submit = () => {
+  const submit = useCallback(() => {
     setHidden(!hidden)
-    if (correctAnswer) {
+    if (answerStatus) {
       setScore(score + 1)
     }
-  }
+    dispatch({
+      type: actions.CORRECT_ANSWER,
+      payload: {
+        counter,
+        score,
+        answer,
+        currentQuestion,
+        answerStatus,
+      },
+    })
+  }, [answer, answerStatus, counter, currentQuestion, dispatch, hidden, score])
 
   const nextQuestion = () => {
     if (counter === ALL_QUESTIONS.length - 1) {
@@ -88,12 +101,9 @@ const Questions = () => {
     }
   }
 
-  useEffect(() => {
-    dispatch({
-      type: actions.CORRECT_SCORE,
-      payload: { answer, score },
-    })
-  })
+  // useEffect(() => {
+
+  // })
 
   return (
     <Container maxWidth='md' className={classes.container}>
@@ -142,7 +152,7 @@ const Questions = () => {
       {!hidden && (
         <Container className={classes.nextPage}>
           <Grid>
-            {correctAnswer ? (
+            {answerStatus ? (
               <Box>
                 <p>Correct!</p>
                 <Answers answer={ALL_QUESTIONS[counter]} />

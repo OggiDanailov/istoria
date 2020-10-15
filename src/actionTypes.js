@@ -1,1 +1,1 @@
-export const CORRECT_SCORE = "CORRECT_SCORE"
+export const CORRECT_ANSWER = "CORRECT_ANSWER"

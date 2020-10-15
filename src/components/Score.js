@@ -1,6 +1,7 @@
 import React from "react"
 import { useSelector } from "react-redux"
 import { makeStyles } from "@material-ui/core"
+import ThumbUpIcon from "@material-ui/icons/ThumbUp"
 
 const useStyles = makeStyles((theme) => ({
   container: {
