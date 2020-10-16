@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import clsx from "clsx"
 import {
   Grid,
@@ -57,42 +57,43 @@ const Questions = () => {
   const [disabledStatus, setDisabledStatus] = useState(true)
   const [activeButton, setActiveButton] = useState("")
 
-  // const { counter } = useSelector((state) => state.projectBoard)
+  const { currentAnswers, currentQuestions } = useSelector(
+    (state) => state.projectBoard
+  )
 
   const selectAnswer = useCallback(
     (event) => {
       setDisabledStatus(false)
       const currentAnswer = event.target.innerHTML
-      setActiveButton(event.target.innerHTML)
+      setActiveButton(currentAnswer)
       if (currentAnswer === ALL_QUESTIONS[counter].correctAnswer) {
         setAnswer(currentAnswer)
         setCurrentQuestion(ALL_QUESTIONS[counter].question)
         setAnswerStatus(true)
+        setScore(score + 1)
       } else {
         setAnswerStatus(false)
       }
     },
-    [counter]
+    [counter, score]
   )
 
   const submit = useCallback(() => {
+    // console.log(currentAnswers)
     setHidden(!hidden)
-    if (answerStatus) {
-      setScore(score + 1)
-    }
     dispatch({
       type: actions.CORRECT_ANSWER,
       payload: {
-        counter,
         score,
         answer,
         currentQuestion,
         answerStatus,
       },
     })
-  }, [answer, answerStatus, counter, currentQuestion, dispatch, hidden, score])
+  }, [answer, answerStatus, currentQuestion, dispatch, hidden, score])
 
   const nextQuestion = () => {
+    console.log(currentAnswers)
     if (counter === ALL_QUESTIONS.length - 1) {
       setCounter(0)
     } else {

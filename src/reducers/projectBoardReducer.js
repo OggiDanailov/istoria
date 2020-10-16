@@ -12,22 +12,12 @@ const initialState = {
 const projectBoardReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.CORRECT_ANSWER:
-      const {
-        counter,
-        score,
-        answer,
-        currentQuestion,
-        answerStatus,
-      } = action.payload
-      console.log(counter + " this is the counter")
-      console.log(score + " this is the score")
-      console.log(answer + " this is answer")
-      console.log(currentQuestion + " this is the current question")
-      console.log(answerStatus + " this is the answerStatus")
-
-      state = dotProp.set(state, "answerStatus", answerStatus)
-      state = dotProp.set(state, "currentAnswer", answer)
-      return dotProp.set(state, "score", score)
+      const { score, answer, currentQuestion, answerStatus } = action.payload
+      // state = dotProp.set(state, "counter", counter)
+      state = dotProp.set(state, "score", score)
+      state = dotProp.merge(state, "currentAnswers", answer)
+      state = dotProp.merge(state, "currentQuestions", currentQuestion)
+      return dotProp.merge(state, "answerStatus", answerStatus)
     default:
       return state
   }
