@@ -1,7 +1,8 @@
 import React from "react"
 import { useSelector } from "react-redux"
-import { makeStyles } from "@material-ui/core"
+import { Grid, Box, Container, makeStyles } from "@material-ui/core"
 import ThumbUpIcon from "@material-ui/icons/ThumbUp"
+import ThumbDownIcon from "@material-ui/icons/ThumbDown"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -9,13 +10,44 @@ const useStyles = makeStyles((theme) => ({
     height: "50px",
     margin: `20px auto`,
     border: `2px solid blue`,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+  },
+  icons: {
+    marginLeft: 10,
+    padding: 5,
+    borderRadius: "50%",
   },
 }))
 
 const Score = () => {
   const classes = useStyles()
-  const { score } = useSelector((state) => state.projectBoard)
-  return <div className={classes.container}>{score === 0 ? " " : score}</div>
+  const { score, answerStatus } = useSelector((state) => state.projectBoard)
+  return (
+    <Grid className={classes.container}>
+      {answerStatus.map((el, index) => {
+        if (el) {
+          return (
+            <ThumbUpIcon
+              key={index}
+              className={classes.icons}
+              style={{ background: "green" }}
+            />
+          )
+        } else {
+          return (
+            <ThumbDownIcon
+              key={el + index}
+              className={classes.icons}
+              style={{ background: "red" }}
+            />
+          )
+        }
+      })}
+    </Grid>
+  )
 }
 
 export default Score

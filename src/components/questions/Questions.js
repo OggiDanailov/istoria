@@ -72,6 +72,8 @@ const Questions = () => {
         setAnswerStatus(true)
         setScore(score + 1)
       } else {
+        setAnswer(currentAnswer)
+        setCurrentQuestion(ALL_QUESTIONS[counter].question)
         setAnswerStatus(false)
       }
     },
@@ -79,7 +81,6 @@ const Questions = () => {
   )
 
   const submit = useCallback(() => {
-    // console.log(currentAnswers)
     setHidden(!hidden)
     dispatch({
       type: actions.CORRECT_ANSWER,
