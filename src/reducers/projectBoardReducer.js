@@ -14,7 +14,7 @@ const projectBoardReducer = (state = initialState, action) => {
     case actions.CORRECT_ANSWER:
       const { score, answer, currentQuestion, answerStatus } = action.payload
       // state = dotProp.set(state, "counter", counter)
-      console.log(state.currentAnswers)
+      // console.log(state.currentAnswers)
       state = dotProp.set(state, "score", score)
       state = dotProp.merge(state, "currentAnswers", answer)
       state = dotProp.merge(state, "currentQuestions", currentQuestion)

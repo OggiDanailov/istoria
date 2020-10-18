@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react"
+import React, { useState, useCallback } from "react"
+import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import clsx from "clsx"
 import {
@@ -46,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 const Questions = () => {
   const dispatch = useDispatch()
   const classes = useStyles()
+  const history = useHistory()
 
   const [counter, setCounter] = useState(0)
   const [score, setScore] = useState(0)
@@ -94,18 +96,13 @@ const Questions = () => {
   }, [answer, answerStatus, currentQuestion, dispatch, hidden, score])
 
   const nextQuestion = () => {
-    console.log(currentAnswers)
     if (counter === ALL_QUESTIONS.length - 1) {
-      setCounter(0)
+      history.push("/general/reivew")
     } else {
       setCounter(counter + 1)
       setHidden(!hidden)
     }
   }
-
-  // useEffect(() => {
-
-  // })
 
   return (
     <Container maxWidth='md' className={classes.container}>
