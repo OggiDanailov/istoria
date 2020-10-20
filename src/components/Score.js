@@ -1,6 +1,6 @@
 import React from "react"
 import { useSelector } from "react-redux"
-import { Grid, Box, Container, makeStyles } from "@material-ui/core"
+import { Grid, makeStyles } from "@material-ui/core"
 import ThumbUpIcon from "@material-ui/icons/ThumbUp"
 import ThumbDownIcon from "@material-ui/icons/ThumbDown"
 
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Score = () => {
   const classes = useStyles()
-  const { score, answerStatus } = useSelector((state) => state.projectBoard)
+  const { answerStatus } = useSelector((state) => state.projectBoard)
   return (
     <Grid className={classes.container}>
       {answerStatus.map((el, index) => {

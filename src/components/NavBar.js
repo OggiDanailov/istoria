@@ -1,6 +1,6 @@
 import React from "react"
 import { NavLink } from "react-router-dom"
-import { Grid, Container, makeStyles } from "@material-ui/core"
+import { Container, makeStyles } from "@material-ui/core"
 
 const useStyles = makeStyles((theme) => ({
   container: {

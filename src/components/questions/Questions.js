@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react"
 import { useHistory } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import clsx from "clsx"
 import {
   Grid,
@@ -59,9 +59,9 @@ const Questions = () => {
   const [disabledStatus, setDisabledStatus] = useState(true)
   const [activeButton, setActiveButton] = useState("")
 
-  const { currentAnswers, currentQuestions } = useSelector(
-    (state) => state.projectBoard
-  )
+  // const { currentAnswers, currentQuestions } = useSelector(
+  //   (state) => state.projectBoard
+  // )
 
   const selectAnswer = useCallback(
     (event) => {
@@ -83,6 +83,7 @@ const Questions = () => {
   )
 
   const submit = useCallback(() => {
+    setDisabledStatus(true)
     setHidden(!hidden)
     dispatch({
       type: actions.CORRECT_ANSWER,
@@ -97,7 +98,7 @@ const Questions = () => {
 
   const nextQuestion = () => {
     if (counter === ALL_QUESTIONS.length - 1) {
-      history.push("/general/reivew")
+      history.push("/review")
     } else {
       setCounter(counter + 1)
       setHidden(!hidden)

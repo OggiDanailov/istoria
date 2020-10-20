@@ -1,1 +1,2 @@
 export const CORRECT_ANSWER = "CORRECT_ANSWER"
+export const SESSION_RESULT = "SESSION_RESULT"
