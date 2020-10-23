@@ -52,6 +52,7 @@ const Questions = () => {
   const [counter, setCounter] = useState(0)
   const [score, setScore] = useState(0)
   const [answer, setAnswer] = useState("")
+  const [id, setId] = useState("")
   const [currentQuestion, setCurrentQuestion] = useState("")
   const [answerStatus, setAnswerStatus] = useState(false)
 
@@ -70,6 +71,7 @@ const Questions = () => {
       setActiveButton(currentAnswer)
       if (currentAnswer === ALL_QUESTIONS[counter].correctAnswer) {
         setAnswer(currentAnswer)
+        setId(ALL_QUESTIONS[counter].id)
         setCurrentQuestion(ALL_QUESTIONS[counter].question)
         setAnswerStatus(true)
         setScore(score + 1)
@@ -88,6 +90,7 @@ const Questions = () => {
     dispatch({
       type: actions.CORRECT_ANSWER,
       payload: {
+        id,
         score,
         answer,
         currentQuestion,

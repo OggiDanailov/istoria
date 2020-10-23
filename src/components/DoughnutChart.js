@@ -13,39 +13,33 @@ const DoughnutChart = () => {
     const falseArray = []
     const dispatch = useDispatch()
 
-
-    const retrieveData = () => {
-        answerStatus.filter((status) => {
-          if(status === true) {
-            trueArray.push(status)
-          } else {
-            falseArray.push(status)
-          }
-        })
-        setChartData({
-          labels: ["CORRECT", "INCORRECT"],
-          datasets: [
-            {
-              data: [trueArray.length, falseArray.length],
-              backgroundColor: ['green', 'red']
-            }, 
-          ]
-        })
-        
-      }
-
-
-      useEffect(() => {
-        retrieveData()
-        setSessionResult(20)
-        dispatch({
-          type: actions.SESSION_RESULT,
-          payload: {
-            sessionResult
-          },
-        })
-
-      }, [])
+    useEffect(() => {
+      answerStatus.filter((status) => {
+        if(status === true) {
+          trueArray.push(status)
+        } else {
+          falseArray.push(status)
+        }
+      })
+      setSessionResult(trueArray.length)
+      console.log(trueArray)
+      console.log(sessionResult)
+      setChartData({
+        labels: ["CORRECT", "INCORRECT"],
+        datasets: [
+          {
+            data: [trueArray.length, falseArray.length],
+            backgroundColor: ['green', 'red']
+          }, 
+        ]
+      })
+      dispatch({
+        type: actions.SESSION_RESULT,
+        payload: {
+          sessionResult
+        },
+      })
+    }, [])
 
     return (
       <Container>
