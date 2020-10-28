@@ -1,46 +1,40 @@
-import React, { useState, useCallback } from "react"
-import { useHistory } from "react-router-dom"
-import { useDispatch } from "react-redux"
-import clsx from "clsx"
-import {
-  Grid,
-  Box,
-  ButtonGroup,
-  Button,
-  Container,
-  makeStyles,
-} from "@material-ui/core"
+import React, { useState, useCallback } from 'react'
+import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import clsx from 'clsx'
+import { Grid, Box, ButtonGroup, Button, Container, makeStyles } from '@material-ui/core'
 
-import Answers from "../Answers"
-import Score from "../Score"
-import ALL_QUESTIONS from "./ALL_QUESTIONS"
-import * as actions from "../../actionTypes"
+import Answers from '../Answers'
+import Score from '../Score'
+import ALL_QUESTIONS from './ALL_QUESTIONS'
+import * as actions from '../../actionTypes'
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    width: "90%",
-    margin: "auto",
+    width: '90%',
+    margin: 'auto',
   },
   questions: {
-    margin: "50px auto",
-    textAlign: "center",
-    fontSize: "1.5rem",
+    margin: '50px auto',
+    textAlign: 'center',
+    fontSize: '1.5rem',
   },
   buttonsWrapper: {
-    width: "90%",
-    margin: "20px auto",
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
+    width: '90%',
+    margin: '20px auto',
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
   },
   buttons: {
-    margin: "5px",
+    margin: '15px 10px',
+    borderRadius: '10px !important',
   },
   buttonsSelected: {
-    backgroundColor: "red",
+    backgroundColor: 'teal'
   },
   nextButton: {
-    border: "2px solid",
-    margin: "20px auto",
+    border: '2px solid',
+    margin: '20px auto',
   },
 }))
 
@@ -51,14 +45,14 @@ const Questions = () => {
 
   const [counter, setCounter] = useState(0)
   const [score, setScore] = useState(0)
-  const [answer, setAnswer] = useState("")
-  const [id, setId] = useState("")
-  const [currentQuestion, setCurrentQuestion] = useState("")
+  const [answer, setAnswer] = useState('')
+  const [id, setId] = useState('')
+  const [currentQuestion, setCurrentQuestion] = useState('')
   const [answerStatus, setAnswerStatus] = useState(false)
 
   const [hidden, setHidden] = useState(true)
   const [disabledStatus, setDisabledStatus] = useState(true)
-  const [activeButton, setActiveButton] = useState("")
+  const [activeButton, setActiveButton] = useState('')
 
   // const { currentAnswers, currentQuestions } = useSelector(
   //   (state) => state.projectBoard
@@ -90,7 +84,6 @@ const Questions = () => {
     dispatch({
       type: actions.CORRECT_ANSWER,
       payload: {
-        id,
         score,
         answer,
         currentQuestion,
@@ -101,7 +94,7 @@ const Questions = () => {
 
   const nextQuestion = () => {
     if (counter === ALL_QUESTIONS.length - 1) {
-      history.push("/review")
+      history.push('/review')
     } else {
       setCounter(counter + 1)
       setHidden(!hidden)
@@ -109,17 +102,15 @@ const Questions = () => {
   }
 
   return (
-    <Container maxWidth='md' className={classes.container}>
+    <Container maxWidth="md" className={classes.container}>
       <Score />
       {hidden && (
         <>
-          <div className={classes.questions}>
-            {ALL_QUESTIONS[counter].question}
-          </div>
+          <div className={classes.questions}>{ALL_QUESTIONS[counter].question}</div>
           <div className={classes.buttons}>
             <ButtonGroup
-              variant='contained'
-              aria-label='contained primary button group'
+              variant="contained"
+              aria-label="contained primary button group"
               className={classes.buttonsWrapper}
             >
               {ALL_QUESTIONS[counter].options.map((option, index) => (
@@ -138,8 +129,8 @@ const Questions = () => {
             </ButtonGroup>
           </div>
           <ButtonGroup
-            variant='contained'
-            aria-label='contained primary button group'
+            variant="contained"
+            aria-label="contained primary button group"
             className={classes.buttonsWrapper}
           >
             <Button

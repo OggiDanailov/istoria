@@ -1,22 +1,19 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import { applyMiddleware, compose, createStore } from "redux"
-import createSagaMiddleware from "redux-saga"
-import { Provider } from "react-redux"
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { applyMiddleware, compose, createStore } from 'redux'
+import createSagaMiddleware from 'redux-saga'
+import { Provider } from 'react-redux'
 
-import "./index.css"
-import App from "./App"
-import * as serviceWorker from "./serviceWorker"
+import './index.css'
+import App from './App'
+import * as serviceWorker from './serviceWorker'
 
-import reducer from "./reducers"
-import sagas from "./sagas"
+import reducer from './reducers'
+import sagas from './sagas'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const sagaMiddleware = createSagaMiddleware()
-const store = createStore(
-  reducer,
-  composeEnhancers(applyMiddleware(sagaMiddleware))
-)
+const store = createStore(reducer, composeEnhancers(applyMiddleware(sagaMiddleware)))
 sagaMiddleware.run(sagas)
 
 ReactDOM.render(
@@ -25,7 +22,7 @@ ReactDOM.render(
       <App />
     </Provider>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 )
 
 // If you want your app to work offline and load faster, you can change

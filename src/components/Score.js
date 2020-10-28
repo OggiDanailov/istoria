@@ -1,24 +1,24 @@
-import React from "react"
-import { useSelector } from "react-redux"
-import { Grid, makeStyles } from "@material-ui/core"
-import ThumbUpIcon from "@material-ui/icons/ThumbUp"
-import ThumbDownIcon from "@material-ui/icons/ThumbDown"
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { Grid, makeStyles } from '@material-ui/core'
+import ThumbUpIcon from '@material-ui/icons/ThumbUp'
+import ThumbDownIcon from '@material-ui/icons/ThumbDown'
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    width: "90%",
-    height: "50px",
+    width: '90%',
+    height: '50px',
     margin: `20px auto`,
     border: `2px solid blue`,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   icons: {
     marginLeft: 10,
     padding: 5,
-    borderRadius: "50%",
+    borderRadius: '50%',
   },
 }))
 
@@ -30,18 +30,14 @@ const Score = () => {
       {answerStatus.map((el, index) => {
         if (el) {
           return (
-            <ThumbUpIcon
-              key={index}
-              className={classes.icons}
-              style={{ background: "green" }}
-            />
+            <ThumbUpIcon key={index} className={classes.icons} style={{ background: 'green' }} />
           )
         } else {
           return (
             <ThumbDownIcon
               key={el + index}
               className={classes.icons}
-              style={{ background: "red" }}
+              style={{ background: 'red' }}
             />
           )
         }
