@@ -1,4 +1,5 @@
 import React from 'react'
+// import { useSelector } from 'react-redux'
 import { Container, Button, Box, Card,  makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
@@ -33,8 +34,9 @@ const useStyles = makeStyles((theme) => ({
      }
   }))
 
-const Map = ({mainCategory, subCategory}) => {
+const Map = ({mainCategory, subCategory, onclick}) => {
     const classes = useStyles()
+    
     return (
         <Container className={classes.container}>
             <Card className={classes.mainButtonWrapper}>
@@ -43,7 +45,7 @@ const Map = ({mainCategory, subCategory}) => {
                 </Box>
             </Card>
             {subCategory.map((item, index ) => (
-            <Card key={item} className={classes.subButtonWrapper}>
+            <Card key={item} className={classes.subButtonWrapper} onClick={onclick}>
                 {
                     index === 0 ?  <Button className={classes.subButton}  >
                     {item}

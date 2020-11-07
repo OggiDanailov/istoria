@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import clsx from 'clsx'
 import { Grid, Box, ButtonGroup, Button, Container, makeStyles } from '@material-ui/core'
 
@@ -54,9 +54,11 @@ const Questions = () => {
   const [disabledStatus, setDisabledStatus] = useState(true)
   const [activeButton, setActiveButton] = useState('')
 
-  // const { currentAnswers, currentQuestions } = useSelector(
-  //   (state) => state.projectBoard
-  // )
+  const { sessionResult } = useSelector(
+    (state) => state.projectBoard
+  )
+
+  
 
   const selectAnswer = useCallback(
     (event) => {

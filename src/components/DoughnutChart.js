@@ -15,13 +15,13 @@ const DoughnutChart = () => {
   useEffect(() => {
     answerStatus.filter((status) => {
       if (status === true) {
-        trueArray.push(status)
+        return trueArray.push(status)
       } else {
-        falseArray.push(status)
+        return falseArray.push(status)
       }
     })
     setSessionResult(trueArray.length)
-  
+
     setChartData({
       labels: ['CORRECT', 'INCORRECT'],
       datasets: [
@@ -37,7 +37,9 @@ const DoughnutChart = () => {
         sessionResult,
       },
     })
-  }, [])
+  }, [sessionResult])
+
+  
 
   return (
     <Container>

@@ -31,4 +31,5 @@ export default [
     synopsis:
       'On the Ides of March (15 March), 44 BC, Caesar was assassinated by a group of rebellious senators led by Brutus and Cassius, who stabbed him to death.',
   },
+
 ]

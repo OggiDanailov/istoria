@@ -5,14 +5,22 @@ import Map from "../components/Map"
 
 const GeneralPage = () => {
   const [isHidden, setIsHidden] = useState(false)
-  const array = ["Mesopotamia", 'Egypt', "China", "India"]
+  const array = ["Medieval European", 'Egypt', "China", "India"]
+
+  const whatever = () => {
+    setIsHidden(!isHidden)
+  }
+
   return (
-    <>
-      <Map mainCategory="Ancient World" subCategory={array} onClick={() => setIsHidden(!isHidden)} />    
-    {
-      isHidden && (<Questions />)
+    <>    
+    {!isHidden ? 
+    <Map
+     mainCategory="European History"
+    subCategory={array}
+    onclick={whatever} />    
+      : <Questions />
     }
-      
+      {/* <Questions /> */}
     </>
   )
 }

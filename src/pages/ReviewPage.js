@@ -29,8 +29,7 @@ const ReviewPage = () => {
   const { currentAnswers, currentQuestions, answerStatus } = useSelector(
     (state) => state.projectBoard
   )
-console.log(answerStatus)
-console.log(currentAnswers)
+
   return (
     <Container>
       <h2>Your Answers</h2>
