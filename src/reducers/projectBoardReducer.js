@@ -8,13 +8,13 @@ const initialState = {
   currentAnswers: [],
   currentQuestions: [],
   answerStatus: [],
-  sessionResult: '',
+  sessionResult: ''
 }
 
 const projectBoardReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.CORRECT_ANSWER:
-      const { score, answer, id, currentQuestion, answerStatus } = action.payload
+      const { score, answer, id, currentQuestion, answerStatus  } = action.payload
       state = dotProp.set(state, 'score', score)
       state = dotProp.set(state, 'id', id)
       state = dotProp.merge(state, 'currentAnswers', answer)

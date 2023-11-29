@@ -1,4 +1,5 @@
 import React from 'react'
+
 // import {
 //   Grid,
 //   Box,
@@ -11,6 +12,7 @@ import React from 'react'
 const Answers = ({ answer }) => {
   return (
     <>
+      <div>This is Answers component</div>
       <div>{answer.synopsis}</div>
     </>
   )

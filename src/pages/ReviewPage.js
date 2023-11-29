@@ -26,9 +26,11 @@ const useStyles = makeStyles((theme) => ({
 
 const ReviewPage = () => {
   const classes = useStyles()
-  const { currentAnswers, currentQuestions, answerStatus } = useSelector(
+  const { currentAnswers, currentQuestions, answerStatus, sessionResult } = useSelector(
     (state) => state.projectBoard
   )
+
+  // const passingStatus = answerStatus.reduce((map, val) => {map[val] = (map[val] || 0)+1; return map}, {} ) 
 
   return (
     <Container>
@@ -54,6 +56,17 @@ const ReviewPage = () => {
           )
         })}
       </Grid>
+      {sessionResult/answerStatus.length >= .8 ? 
+        <div>
+          <h3>Congratulations! You are passing to the next round</h3>
+          <button>NEXT</button>
+        </div>
+         : 
+        <div>
+          <h3>Not a passing score of 80%; Please take the quiz again</h3>
+          <button>Take Quiz Again </button>
+        </div>
+      }
     </Container>
   )
 }

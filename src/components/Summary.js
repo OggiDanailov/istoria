@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     width: '90%',
     height: '50px',
     margin: `20px auto`,
-    border: `2px solid blue`,
+    border: `12px solid blue`,
   },
 }))
 
